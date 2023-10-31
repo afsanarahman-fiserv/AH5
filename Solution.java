@@ -4,7 +4,7 @@ import java.util.Map;
 
 class Solution {
     public static char mostFrequentChar(String s) {
-        // edge cases
+        // edge case
         if(s.isEmpty()) return ' ';
 
         // put all characters of given string in a HashMap w/respective counts
@@ -18,12 +18,10 @@ class Solution {
             }
         }
 
-        // find the char(s) with the max count(s)
+        // find the max count for any character
         int max = 0;
-        for(Map.Entry<Character, Integer> e : chars.entrySet()) {
-            if(e.getValue() > max) {
-                max = e.getValue();
-            }
+        for(int i : chars.values()) {
+            if(i > max) max = i;
         }
 
         // check if there are multiple characters with the same count
@@ -34,15 +32,17 @@ class Solution {
             }
         }
 
-        if(mostFreqChars.size() == 1) return mostFreqChars.get(0);
-        else {
+        // if there is one char w/the max frequency, return that char
+        if(mostFreqChars.size() == 1) {
+            return mostFreqChars.get(0);
+        } else { // otherwise there are multiple chars w/the same max frequency
             for (int i = 0; i < s.length(); i++) {
-                if(mostFreqChars.contains(s.charAt(i))) {
-                    return s.charAt(i);
-                }
+                char c = s.charAt(i);
+                if(mostFreqChars.contains(c)) return c;
             }
         }
 
+        // shouldn't ever reach this statement, but just in case
         return ' ';
     }
   
